@@ -102,11 +102,11 @@ const updateStatusController = async (req, res) => {
     // sending sms to the user
     if (status === "approved") {
       const user_message = `Your Appointment with Dr.${appointments.doctorInfo.firstName} ${appointments.doctorInfo.lastName} is approved, for appointment timing please check in the appointment section of your DOC app account`;
-      // await send_SMS(appointments.userInfo.number, user_message);
+      await send_SMS(appointments.userInfo.number, user_message);
       await sendEmail(appointments.userInfo.email, user_message)
     } else if (status === "reject") {
       const user_message = `Your Appointment with Dr.${appointments.doctorInfo.firstName} ${appointments.doctorInfo.lastName} is Rejected, to book a new appointment visit our website`;
-      // await send_SMS(appointments.userInfo.number, user_message);
+      await send_SMS(appointments.userInfo.number, user_message);
       await sendEmail(appointments.userInfo.email, user_message)
 
     }
