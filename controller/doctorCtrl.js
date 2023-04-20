@@ -2,7 +2,7 @@ const appointmentModel = require("../models/appointmentModel");
 const doctorModel = require("../models/doctorModel");
 const userModel = require("../models/userModel");
 const send_SMS = require("../send_message/sendSMS");
-const sendEmail = require("../send_message/sendEmail")
+const sendEmail = require("../send_message/sendEmail");
 
 const getDoctorInfoController = async (req, res) => {
   try {
@@ -102,13 +102,12 @@ const updateStatusController = async (req, res) => {
     // sending sms to the user
     if (status === "approved") {
       const user_message = `Your Appointment with Dr.${appointments.doctorInfo.firstName} ${appointments.doctorInfo.lastName} is approved, for appointment timing please check in the appointment section of your DOC app account`;
-      await send_SMS(appointments.userInfo.number, user_message);
-      await sendEmail(appointments.userInfo.email, user_message)
+      // await send_SMS(appointments.userInfo.number, user_message);
+      await sendEmail(appointments.userInfo.email, user_message);
     } else if (status === "reject") {
       const user_message = `Your Appointment with Dr.${appointments.doctorInfo.firstName} ${appointments.doctorInfo.lastName} is Rejected, to book a new appointment visit our website`;
-      await send_SMS(appointments.userInfo.number, user_message);
-      await sendEmail(appointments.userInfo.email, user_message)
-
+      // await send_SMS(appointments.userInfo.number, user_message);
+      await sendEmail(appointments.userInfo.email, user_message);
     }
     await user.save();
     res.status(200).send({
