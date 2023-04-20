@@ -47,8 +47,7 @@ const BookingPage = () => {
   const initializeDoctorTime = () => {
     setStart(parseInt(remove(doctors.timings[0])));
     setEnd(parseInt(remove(doctors.timings[1])));
-
-  }
+  };
   // ============ handle availiblity
   // const handleAvailability = async () => {
   //   try {
@@ -158,8 +157,8 @@ const BookingPage = () => {
                 format="HH:mm"
                 className="mt-3"
                 defaultValue={dayjs("00:00", "HH:mm")}
-                disabledTime={disabledTime}
                 onMouseUp={initializeDoctorTime}
+                disabledTime={disabledTime}
                 onChange={(value, dateString) => {
                   console.log(value, dateString);
                   setTime(dateString);
