@@ -157,6 +157,8 @@ const BookingPage = () => {
                 format="HH:mm"
                 className="mt-3"
                 defaultValue={dayjs("00:00", "HH:mm")}
+                onMouseEnter={initializeDoctorTime}
+                onClick={initializeDoctorTime}
                 onMouseUp={initializeDoctorTime}
                 disabledTime={disabledTime}
                 onChange={(value, dateString) => {
