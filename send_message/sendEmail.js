@@ -44,7 +44,10 @@ module.exports = function send_Email(to, message) {
             font-weight: 200;
             color: #00204a;">${message}
         </p>
-        <button style="border-radius: 5%;
+        <a href="https://hospital-management-seven.vercel.app/" style="margin: auto;
+        display: inherit;
+        text-decoration: none;">
+            <button style="border-radius: 5%;
         border-color: transparent;
         background-color: #646464;
         color: #fff;
@@ -52,7 +55,9 @@ module.exports = function send_Email(to, message) {
         border-width: 0;
         margin: auto;
         display: inherit;
-        transition: 0.3s;">Visit website</button>
+        transition: 0.3s;
+        cursor: pointer;">Visit website</button>
+        </a>
     </div>
     </html>
     `,
