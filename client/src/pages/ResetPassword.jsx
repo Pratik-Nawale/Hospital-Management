@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, message } from "antd";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const ResetPassword = () => {
