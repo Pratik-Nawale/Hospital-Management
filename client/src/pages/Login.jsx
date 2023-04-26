@@ -49,6 +49,10 @@ const Login = () => {
           <button className="btn btn-primary" type="submit">
             Login
           </button>
+          <br />
+          <Link to="/forgot-password" className="m-2">
+            Forgot Password?
+          </Link>
         </Form>
       </div>
     </>

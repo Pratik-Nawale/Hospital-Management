@@ -52,6 +52,15 @@ const changeAccountStatusController = async (req, res) => {
     user.isDoctor = status === "approved" ? true : false;
     user.isDoctor = status === "pending" ? false : true;
     await user.save();
+    if (status === "approved") {
+      const user_message = `Your application for doctor is Accepted`;
+      // await send_SMS(appointments.userInfo.number, user_message);
+      await sendEmail(doctor.email, user_message);
+    } else if (status === "reject") {
+      const user_message = `Your application for doctor is Rejected`;
+      // await send_SMS(appointments.userInfo.number, user_message);
+      await sendEmail(doctor.email, user_message);
+    }
     res.status(201).send({
       success: true,
       message: "Account Status Updated",

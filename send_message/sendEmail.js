@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 // const email = "pratiknawale03@gmail.com";
 
-module.exports = function send_Email(to, message) {
+module.exports = function send_Email(to, message, button="Visit Website", link="https://hospital-management-seven.vercel.app/") {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -44,7 +44,7 @@ module.exports = function send_Email(to, message) {
             font-weight: 200;
             color: #00204a;">${message}
         </p>
-        <a href="https://hospital-management-seven.vercel.app/" style="margin: auto;
+        <a href=${link} style="margin: auto;
         display: inherit;
         text-decoration: none;">
             <button style="border-radius: 5%;
@@ -56,7 +56,7 @@ module.exports = function send_Email(to, message) {
         margin: auto;
         display: inherit;
         transition: 0.3s;
-        cursor: pointer;">Visit website</button>
+        cursor: pointer;">${button}</button>
         </a>
     </div>
     </html>

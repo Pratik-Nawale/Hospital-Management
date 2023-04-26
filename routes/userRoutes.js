@@ -13,7 +13,9 @@ const {
   userAppointmentsController,
   getUserInfoController,
   updateUserInfoController,
-  updateUserPasswordController
+  updateUserPasswordController,
+  forgotPasswordController,
+  resetPasswordController,
 } = require("../controller/userCtrl");
 const authMiddleware = require("../middleware/authMiddleware");
 
@@ -22,6 +24,10 @@ const router = express.Router();
 router.post("/login", loginController);
 
 router.post("/register", registerController);
+
+router.post("/forgot-password", forgotPasswordController);
+
+router.post("/reset-password", resetPasswordController);
 
 //?  Authorization || Post
 router.post("/getUserData", authMiddleware, authController);
@@ -60,6 +66,10 @@ router.post("/getUserInfo", authMiddleware, getUserInfoController);
 
 router.post("/updateProfile", authMiddleware, updateUserInfoController);
 
-router.post("/update-user-password", authMiddleware, updateUserPasswordController);
+router.post(
+  "/update-user-password",
+  authMiddleware,
+  updateUserPasswordController
+);
 
 module.exports = router;

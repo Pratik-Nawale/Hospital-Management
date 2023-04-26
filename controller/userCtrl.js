@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const doctorModel = require("../models/doctorModel");
 const appointmentModel = require("../models/appointmentModel");
 const moment = require("moment");
+const sendEmail = require("../send_message/sendEmail");
 
 // ? Controller for New User Register Component
 
@@ -243,7 +244,6 @@ const bookingAvailabilityController = async (req, res) => {
       return res.status(200).send({
         success: true,
         message: "Appointments available",
-        
       });
     }
   } catch (error) {
@@ -358,6 +358,63 @@ const updateUserPasswordController = async (req, res) => {
   }
 };
 
+const forgotPasswordController = async (req, res) => {
+  try {
+    const user = await userModel.findOne({ email: req.body.email });
+    if (!user) {
+      return res
+        .status(200)
+        .send({ message: "user not found", success: false });
+    }
+
+    const user_message = `visit the following link to reset the password`;
+    // await send_SMS(appointments.userInfo.number, user_message);
+    await sendEmail(
+      req.body.email,
+      user_message,
+      "Reset Password",
+      `https://hospital-management-seven.vercel.app/reset-password/${user?._id}`
+    );
+
+    res.status(200).send({
+      message: "Password reset link sent to your Email",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: `Error while sending email` });
+  }
+};
+
+const resetPasswordController = async(req, res) => {
+
+  try {
+    const user = await userModel.findOneAndUpdate({ _id:req.body.userId }, {});
+    if (!user) {
+      return res
+        .status(200)
+        .send({ message: "user not found", success: false });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    await user.updateOne({ password: hashedPassword });
+    await user.save();
+
+
+    res.status(200).send({
+      message: "Password reset successfully",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: `Error while reseting the passoword` });
+  }
+};
+
+
 module.exports = {
   loginController,
   registerController,
@@ -372,4 +429,6 @@ module.exports = {
   getUserInfoController,
   updateUserInfoController,
   updateUserPasswordController,
+  forgotPasswordController,
+  resetPasswordController,
 };
