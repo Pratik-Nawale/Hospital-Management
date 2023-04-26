@@ -4,10 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ForgotPassword = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmitHandler = async (values) => {
-
     try {
       const res = await axios.post("/api/v1/user/forgot-password", values);
       // console.log(values);

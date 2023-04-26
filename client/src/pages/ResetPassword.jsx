@@ -11,7 +11,10 @@ const ResetPassword = () => {
 
   const onSubmitHandler = async (values) => {
     try {
-      const res = await axios.post("/api/v1/user/reset-password", {password: values.password, userId});
+      const res = await axios.post("/api/v1/user/reset-password", {
+        password: values.password,
+        userId,
+      });
       console.log(values);
       if (res.data.success) {
         message.success(res.data.message);
@@ -44,7 +47,7 @@ const ResetPassword = () => {
           className="register-form"
         >
           <h3 className="text-centre">Reset Password</h3>
-          
+
           <Form.Item label="Password" name="password">
             <Input type="password" required />
           </Form.Item>
