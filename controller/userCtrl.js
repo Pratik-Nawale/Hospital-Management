@@ -386,9 +386,10 @@ const forgotPasswordController = async (req, res) => {
   }
 };
 
-const resetPasswordController = async (req, res) => {
+const resetPasswordController = async(req, res) => {
+
   try {
-    const user = await userModel.findOneAndUpdate({ _id: req.body.userId }, {});
+    const user = await userModel.findOne({ _id:req.body.userId });
     if (!user) {
       return res
         .status(200)
@@ -402,6 +403,7 @@ const resetPasswordController = async (req, res) => {
     await user.updateOne({ password: hashedPassword });
     await user.save();
 
+
     res.status(200).send({
       message: "Password reset successfully",
       success: true,
@@ -411,6 +413,7 @@ const resetPasswordController = async (req, res) => {
     res.status(500).send({ message: `Error while reseting the passoword` });
   }
 };
+
 
 module.exports = {
   loginController,
